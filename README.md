@@ -8,6 +8,8 @@
 ![平台](https://img.shields.io/badge/平台-Apple%20Silicon-black)
 ![本地运行](https://img.shields.io/badge/推理-100%25%20本地-green)
 
+![正在识别](screenshot-running.png)
+
 ---
 
 ## 运行要求
@@ -24,6 +26,8 @@
 > 插件启动时也会自动检测，如果是 Rosetta 会直接提示。
 
 ## 安装
+
+![安装本地推理引擎](screenshot-install.png)
 
 1. 到 [Releases](../../releases/latest) 下载 `.eagleplugin` 文件
 2. 双击安装，Eagle 会自动导入
@@ -49,14 +53,18 @@
 
 | 配置 | 速度 |
 |---|---|
-| **Core ML batch=1** | **4.78 张/秒** |
+| **Core ML batch=1** | **约 3.4–3.7 张/秒** |
 | Core ML batch=2 | 0.91 张/秒 |
 | Core ML batch=4 | 0.91 张/秒 |
-| 纯 CPU | 0.62 张/秒 |
+| 纯 CPU 回退 | 0.62 张/秒 |
 
-*（M2 Max 实测）*
+*（M2 Max 实测，端到端——含读图、推理、写回 Eagle。纯推理峰值可达 4.78 张/秒，但日常看到的是端到端数字。）*
 
 这和 NVIDIA 显卡的经验**相反**——在 Apple Silicon 上调大 batch 不仅更慢，还要重新编译一次模型、多占 2.4 GB 缓存。除非你想自己对比，否则保持默认的 1。
+
+![任务完成](screenshot-done.png)
+
+上图是一次真实的批量任务：454 张成功写入，20 张因为已有标签被自动跳过，2 张失败（源文件本身损坏）。失败项可以一键在 Eagle 中选中定位。
 
 ## 隐私
 
