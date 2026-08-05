@@ -4,13 +4,13 @@
 
 收藏了几万张素材约等于没收藏——因为找不到。手动打标签没人愿意做，所以有了这个插件。
 
-[![下载](https://img.shields.io/badge/下载-v0.6.1-orange)](../../releases/latest)
-![平台](https://img.shields.io/badge/平台-Apple%20Silicon-black)
+[![下载](https://img.shields.io/badge/下载-v0.7.0-orange)](../../releases/latest)
+![平台](https://img.shields.io/badge/平台-Apple%20Silicon%20%2F%20Intel-black)
 ![本地运行](https://img.shields.io/badge/推理-100%25%20本地-green)
 
 ![正在识别](screenshot-running.png)
 
-> Windows 版在 [ds-eagle-tagger](https://github.com/discipohub/ds-eagle-tagger)，本仓库只覆盖 macOS（Apple Silicon）。
+> Windows 版在 [ds-eagle-tagger](https://github.com/discipohub/ds-eagle-tagger)，本仓库只覆盖 macOS。
 
 ---
 
@@ -18,14 +18,19 @@
 
 | 项目 | 要求 |
 |---|---|
-| 芯片 | Apple Silicon（M1/M2/M3/M4）。**暂不支持 Intel Mac** |
+| 芯片 | Apple Silicon（M1/M2/M3/M4）或 Intel Mac |
 | 系统 | macOS 13 或更新 |
-| Eagle | **必须是 Apple Silicon 原生版**，不能是 Rosetta 运行的 Intel 版 |
-| 磁盘 | 预留 5 GB（模型 1.2 GB + 推理缓存 2.4 GB + 运行环境） |
+| 磁盘 | Apple Silicon 预留 5 GB，Intel 预留 3 GB |
 | 网络 | 仅首次安装需要 |
 
-> **怎么确认 Eagle 是原生版**：活动监视器 → 找到 Eagle → 看「种类」列，应为 Apple 而不是 Intel。
-> 插件启动时也会自动检测，如果是 Rosetta 会直接提示。
+**Apple Silicon 和 Intel 是两个安装包**，下载时按你的机器选。装错了插件会直接提示，不会装出一个跑不起来的环境。
+
+> 不确定自己是哪种：屏幕左上角苹果菜单 → 关于本机 → 看「芯片」是 Apple 还是 Intel。
+
+Apple Silicon 走 Core ML，用得上神经引擎；Intel 没有神经引擎，走 CPU 推理，速度明显慢一截，但功能完全一样。
+
+> **Apple Silicon 用户注意**：Eagle 必须是 Apple Silicon 原生版，不能是 Rosetta 运行的 Intel 版，否则 Core ML 用不上。
+> 活动监视器 → 找到 Eagle → 看「种类」列，应为 Apple 而不是 Intel。插件启动时也会自动检测并提示。
 
 ## 安装
 
@@ -38,7 +43,7 @@
 
 ```
 帮我安装 Mac 版 Eagle 插件 ds Eagle Tagger，安装指南：https://github.com/discipohub/ds-eagle-tagger-mac
-先读指南确认我的 Mac 和 Eagle 是否满足要求，再一步步带我装（下载和双击安装由我来点）。
+先读指南确认我的 Mac 和 Eagle 是否满足要求、该下 Apple Silicon 还是 Intel 版，再一步步带我装（下载和双击安装由我来点）。
 ```
 
 > 下载 `.eagleplugin`、双击安装、在插件里点按钮，这几步仍然是你本人操作——
@@ -48,7 +53,7 @@
 
 ![安装本地推理引擎](screenshot-install.png)
 
-1. 到 [Releases](../../releases/latest) 下载 `.eagleplugin` 文件
+1. 到 [Releases](../../releases/latest) 下载对应你机器的 `.eagleplugin`：Apple Silicon 选 `Apple-Silicon`，Intel 选 `Intel`
 2. 双击安装，Eagle 会自动导入
 3. 在 Eagle 插件面板打开 ds Eagle Tagger，点「开始安装」
 4. 等待运行环境准备完成
@@ -59,6 +64,8 @@
 国内网络已做优化，安装和模型下载优先走国内源，无需代理。
 
 首次使用需要安装运行环境和下载模型（约 1.26 GB），之后秒开。批处理张数保持默认即可。
+
+Apple Silicon 首次识别还要编译一次 Core ML 模型（约 20 秒），界面会提示，不是卡死；Intel 走 CPU 推理，没有这一步。
 
 ![任务完成](screenshot-done.png)
 
@@ -88,8 +95,11 @@
 
 ## 常见问题
 
+**提示装错了架构的插件包**
+到 Releases 下载另一个包重装：Apple Silicon 机器用 `Apple-Silicon`，Intel 机器用 `Intel`。
+
 **提示检测到 Rosetta**
-装 Apple Silicon 原生版 Eagle。混用 x64 Eagle 和 arm64 推理组件会导致 Core ML 不可用。
+这条只会出现在 Apple Silicon 机器上——说明你装的 Eagle 是 Intel 版，正被 Rosetta 翻译运行，Core ML 用不上。装 Apple Silicon 原生版 Eagle 即可。Intel Mac 上不会遇到这个提示。
 
 **安装时 Connection refused / 下载失败**
 插件已内置国内镜像兜底，重试一般能过。安装日志会写明当前走的是镜像还是官方源。

@@ -3,6 +3,23 @@
 版本号与 Windows 版 [ds-eagle-tagger](https://github.com/discipohub/ds-eagle-tagger) 对齐，功能保持一致；
 差异只在平台相关部分（推理后端、安装器、路径、镜像）。
 
+## 0.7.0
+
+**支持 Intel Mac**
+
+- Intel Mac 现在可以使用，功能与 Apple Silicon 完全一致。
+- Apple Silicon 与 Intel 分成两个安装包。合成一个通用包会让每个用户都多下一份
+  自己用不到的 uv 二进制（每个架构约 50MB），不划算。
+- Intel 强制走 CPU 推理。x86_64 版 onnxruntime 其实也带 `CoreMLExecutionProvider`，
+  但 Intel Mac 没有神经引擎，Core ML 只能落到 CPU / 核显，却照样要付约 20 秒的
+  首次编译和约 2.4GB 的缓存——不如直接走 CPU。
+- 装错架构的包会在启动时明确提示该下哪个版本。放着不管的话，uv 只会以
+  「Bad CPU type in executable」被系统杀掉，报错里看不出是下错了包。
+- 界面按机器如实显示：Intel 显示 CPU 型号和「内存」，不再套用「统一内存」；
+  「实测最快」是 M2 Max 上量出来的结论，Intel 上不再跟着显示。
+- Rosetta 检测逻辑不变。真 Intel Mac 不会触发，只有 Apple Silicon 上跑 Intel 版
+  Eagle 才会——那种情况仍然应该换成原生版 Eagle。
+
 ## 0.6.1
 
 与 Windows 0.6.1 功能对齐，另含以下 Mac 专属实现：
