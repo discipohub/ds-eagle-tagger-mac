@@ -7,10 +7,12 @@
 [![下载](https://img.shields.io/badge/下载-v0.8.0-orange)](../../releases/latest)
 ![平台](https://img.shields.io/badge/平台-Apple%20Silicon%20%2F%20Intel-black)
 ![本地运行](https://img.shields.io/badge/推理-100%25%20本地-green)
+[![Windows 版](https://img.shields.io/badge/Windows%20版-点这里-0078D4)](https://github.com/discipohub/ds-eagle-tagger)
 
 ![正在识别](screenshot-running.png)
 
-> Windows 版在 [ds-eagle-tagger](https://github.com/discipohub/ds-eagle-tagger)，本仓库只覆盖 macOS。
+> **用 Windows？** 请到 Windows 版仓库 [ds-eagle-tagger](https://github.com/discipohub/ds-eagle-tagger)，[直接下载最新版 →](https://github.com/discipohub/ds-eagle-tagger/releases/latest)
+> 本仓库只覆盖 macOS，两边版本号与功能保持一致。
 
 ---
 

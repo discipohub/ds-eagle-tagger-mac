@@ -26,7 +26,7 @@
 
 - 按文件夹选图时，Eagle 运行期间新加入文件夹的图片读不到的问题。
 
-> Mac 版先行发布 0.8.0，Windows 版随后跟进。
+> Windows 版 0.8.0 同步发布：[ds-eagle-tagger](https://github.com/discipohub/ds-eagle-tagger/releases/latest)。
 
 ## 0.7.0
 
