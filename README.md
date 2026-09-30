@@ -1,10 +1,10 @@
-# ds Eagle Tagger · Mac 版
+# DS Eagle Tagger · Mac 版
 
-用 WD14 模型给 [Eagle](https://eagle.cool) 素材库自动打标签。**全部在本机运行**，图片不上传。
+用 WD14 模型给 [Eagle](https://eagle.cool) 素材库自动打标签，**可写中文、英文或中英双语**。全部在本机运行，图片不上传。
 
 收藏了几万张素材约等于没收藏——因为找不到。手动打标签没人愿意做，所以有了这个插件。
 
-[![下载](https://img.shields.io/badge/下载-v0.7.0-orange)](../../releases/latest)
+[![下载](https://img.shields.io/badge/下载-v0.8.0-orange)](../../releases/latest)
 ![平台](https://img.shields.io/badge/平台-Apple%20Silicon%20%2F%20Intel-black)
 ![本地运行](https://img.shields.io/badge/推理-100%25%20本地-green)
 
@@ -42,7 +42,7 @@ Apple Silicon 走 Core ML，用得上神经引擎；Intel 没有神经引擎，�
 它会读懂本说明、先确认你的机器能不能装，再一步步带你完成：
 
 ```
-帮我安装 Mac 版 Eagle 插件 ds Eagle Tagger，安装指南：https://github.com/discipohub/ds-eagle-tagger-mac
+帮我安装 Mac 版 Eagle 插件 DS Eagle Tagger，安装指南：https://github.com/discipohub/ds-eagle-tagger-mac
 先读指南确认我的 Mac 和 Eagle 是否满足要求、该下 Apple Silicon 还是 Intel 版，再一步步带我装（下载和双击安装由我来点）。
 ```
 
@@ -55,9 +55,10 @@ Apple Silicon 走 Core ML，用得上神经引擎；Intel 没有神经引擎，�
 
 1. 到 [Releases](../../releases/latest) 下载对应你机器的 `.eagleplugin`：Apple Silicon 选 `Apple-Silicon`，Intel 选 `Intel`
 2. 双击安装，Eagle 会自动导入
-3. 在 Eagle 插件面板打开 ds Eagle Tagger，点「开始安装」
+3. 在 Eagle 插件面板打开 DS Eagle Tagger，点「开始安装」
 4. 等待运行环境准备完成
-5. 第一次识别时会下载 WD14 模型（约 1.26 GB），有进度显示和断点续传
+5. 选择打标范围 → 在「设置并确认」页选标签语言和处理方式 → 开始识别
+6. 第一次识别时会下载 WD14 模型（约 1.26 GB），有进度显示和断点续传
 
 > ⚠️ **不要手动双击插件目录里的 `engine/tools/uv`**。那是安装工具，手动打开会被 macOS 拦截并**记住这次拒绝**，之后插件自己调用也会失败。交给插件自动处理即可。
 
@@ -71,8 +72,9 @@ Apple Silicon 首次识别还要编译一次 Core ML 模型（约 20 秒），�
 
 ## 功能
 
+- **中文标签**：可选中文（默认）/ English / 中英双语。内置约 8,000 条中文词表，角色名和颜文字保留英文原文
 - **三种打标范围**：选定文件夹（含子文件夹）／Eagle 当前选中的图片／整个图库
-- **不覆盖已有标签**：默认跳过已打标的图片，也可以选择在已有标签上**补充**
+- **不覆盖已有标签**：默认跳过已打标的图片，也可以选择在已有标签上**补充**。补充时选中文，图上已有的英文标签会一并转成中文；开始前会提示受影响张数并要求确认，你自己加的标签不受影响
 - **不重复处理**：记住哪些图片处理过，换库或重装后不重复劳动
 - **模型更新**：支持检查和下载新版本模型
 - **失败可定位**：任何失败项都能一键在 Eagle 中选中
@@ -82,7 +84,7 @@ Apple Silicon 首次识别还要编译一次 Core ML 模型（约 20 秒），�
 
 图片和标签全部在本机处理，不会上传任何地方。没有账号系统、没有遥测、没有行为统计。
 
-联网只发生在两处：下载运行组件、下载 WD14 模型。
+联网只发生在两处：下载运行组件、下载 WD14 模型。中文翻译用的是插件内置词表，不调用任何在线翻译。
 
 详见 [PRIVACY.md](PRIVACY.md)。
 
@@ -107,8 +109,14 @@ Apple Silicon 首次识别还要编译一次 Core ML 模型（约 20 秒），�
 **提示「安装工具被系统安全策略终止」**
 在访达里右键点插件包选「打开」，或按界面提示在终端执行给出的 `xattr` 命令。这是 macOS Gatekeeper 对未公证二进制的拦截。
 
-**识别结果是英文标签**
-WD14 模型输出的就是英文 danbooru 风格标签，这是模型本身的特性。
+**想要英文标签 / 中英双语**
+在「设置并确认」页切换标签语言，插件会记住你的选择。从旧版升级的用户默认保持 English，不会突然改变已有习惯。
+
+**有些标签还是英文**
+角色名、颜文字和极少数没有对应译法的标签保留英文原文，这是有意为之——硬翻反而搜不到。
+
+**rating 分级标签去哪了**
+默认关闭。需要时在设置里打开，会写成「分级:全年龄」「分级:擦边」等。
 
 **「检查模型更新」点了没反应 / 连不上**
 模型目录托管在 GitHub，国内可能访问受限。插件已优先走 jsDelivr CDN，仍失败时会提示「在线更新源暂时无法连接」——不影响已装模型的正常使用。
