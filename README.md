@@ -1,8 +1,10 @@
 # DS Eagle Tagger · Mac 版
 
-用 WD14 模型给 [Eagle](https://eagle.cool) 素材库自动打标签，**可写中文、英文或中英双语**。全部在本机运行，图片不上传。
+用 WD14 模型给 [Eagle](https://eagle.cool) 素材库自动打标签，**可写中文、英文或中英双语**。
+全部在本机运行，图片不上传。
 
-收藏了几万张素材约等于没收藏——因为找不到。手动打标签没人愿意做，所以有了这个插件。
+收藏了几万张素材约等于没收藏——因为找不到。
+手动打标签没人愿意做，所以有了这个插件。
 
 [![下载](https://img.shields.io/badge/下载-v0.8.0-orange)](../../releases/latest)
 ![平台](https://img.shields.io/badge/平台-Apple%20Silicon%20%2F%20Intel-black)
